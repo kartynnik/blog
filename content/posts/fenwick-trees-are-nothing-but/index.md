@@ -35,8 +35,8 @@ which is further divided in half, and so on, until segments of length 1 are form
 These become the leaves of a binary tree, whose root is a segment covering the entire
 span of the array and the children of any non-leaf segment are its halves.[^1]
 
-[^1] One can alternatively start with length-1 segments and joining them into
-pairs, then joining those pairs into quartuplets, etc. This way, even for non-power-of-2
+[^1]: One can alternatively start with length-1 segments and join them into
+pairs, then join those pairs into quartuplets, etc. This way, even for non-power-of-2
 array sizes, the splits will be exactly as illustrated further.
 
 It is immediately obvious that the height of the tree is logarithmic in the number
