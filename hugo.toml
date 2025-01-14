@@ -1,4 +1,4 @@
-baseURL = 'https://yury.kartynnik.info/'
+baseURL = 'https://blog.kartynnik.info/'
 languageCode = 'en-us'
 title = "Yury Kartynnik's blog"
 theme = 'typo'
