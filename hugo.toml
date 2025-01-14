@@ -1,0 +1,94 @@
+baseURL = 'https://yury.kartynnik.info/'
+languageCode = 'en-us'
+title = "Yury Kartynnik's blog"
+theme = 'typo'
+
+[taxonomies]
+tag = 'tags'
+
+# Google analytics code
+# googleAnalytics = "G-xxxxxxxxx"
+
+[params]
+faviconPath = 'favicons'
+
+math = true
+
+# Meta description
+description = "Scratching an itch for knowledge sharing"
+
+# Appearance settings
+theme = 'auto'
+colorPalette = 'default'
+hideHeader = true
+
+# Intro on main page, content is markdown
+homeIntroTitle = 'Welcome!'
+homeIntroContent = """
+I am a software engineer with background in machine learning across vision, NLP, and audio domains.
+I have worked at [Yandex](https://en.wikipedia.org/wiki/Yandex) and [AIMatter](https://techcrunch.com/2017/08/16/google-acquires-aimatter-maker-of-the-fabby-computer-vision-app/) and am presently employed by Google,
+where I am part of the [AI Red Team](https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/).
+
+I hold a Ph.D. in Mathematics (Graph Theory × Computational Complexity).
+"""
+
+# Collection to display on home
+homeCollectionTitle = 'Posts'
+homeCollection = 'posts'
+
+# Lists parameters
+paginationSize = 100
+listSummaries = true
+listDateFormat = '2 Jan 2006'
+
+# Breadcrumbs
+breadcrumbs = true
+
+# Social icons
+[[params.social]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/kartynnik/"
+
+[[params.social]]
+name = "github"
+url = "https://github.com/kartynnik"
+
+[[params.social]]
+name = "googlescholar"
+url = "https://scholar.google.com/citations?user=JE_GL64AAAAJ"
+
+[[params.social]]
+name = "telegram"
+url = "https://t.me/kartynnik"
+
+# Main menu pages
+[[params.menu]]
+name = "home"
+url = "/"
+
+[[params.menu]]
+name = "posts"
+url = "/posts"
+
+# Giscus comments
+[params.giscus]
+enable = true
+repo = "kartynnik/blog"
+repoid = "R_kgDONpaOrw"
+category = "Announcements"
+categoryid = "DIC_kwDONpaOr84Cl9HP"
+mapping = "pathname"
+theme = "preferred_color_scheme"
+
+# Syntax highlight on code blocks
+[markup]
+[markup.highlight]
+style = 'catppuccin-frappe'
+
+[markup.goldmark]
+[markup.goldmark.extensions]
+[markup.goldmark.extensions.passthrough]
+enable = true
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['\[', '\]'], ['$$', '$$']]
+inline = [['\(', '\)'], ['$', '$']]
