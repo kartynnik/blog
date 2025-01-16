@@ -7,7 +7,7 @@ theme = 'typo'
 tag = 'tags'
 
 # Google analytics code
-# googleAnalytics = "G-xxxxxxxxx"
+googleAnalytics = 'G-ZSRJED345T'
 
 [params]
 faviconPath = 'favicons'
