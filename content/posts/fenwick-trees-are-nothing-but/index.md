@@ -368,7 +368,7 @@ gives another illustration of Fenwick trees and discusses performance implicatio
 of the standard tree layout, proposing certain modifications for cache
 friendliness.
 
-The code for drawing the animations is available [on GitHub](https://github.com/kartynnik/fenwick-animations).
+The code for drawing the animations is available [on GitHub](https://github.com/kartynnik/fenwick-illustrations).
 
 ## References
 * [Fenwick tree --- Wikipedia](https://en.wikipedia.org/wiki/Fenwick_tree)
