@@ -6,8 +6,9 @@ theme = 'typo'
 [taxonomies]
 tag = 'tags'
 
-# Google analytics code
-googleAnalytics = 'G-ZSRJED345T'
+[services]
+[services.googleAnalytics]
+id = 'G-ZSRJED345T'
 
 [params]
 faviconPath = 'favicons'
