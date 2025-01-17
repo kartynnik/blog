@@ -8,7 +8,7 @@ toc = true
 readTime = true
 autonumber = false
 math = true
-tags = ["fenwick", "segment-tree", "algorithms"]
+tags = ["fenwick tree", "segment tree", "algorithms"]
 showTags = false
 hideBackToTop = false
 +++
