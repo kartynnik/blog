@@ -21,14 +21,14 @@ description = "Scratching an itch for knowledge sharing"
 # Appearance settings
 theme = 'auto'
 colorPalette = 'default'
-hideHeader = true
+hideHeader = false
 
 # Intro on main page, content is markdown
 homeIntroTitle = 'Welcome!'
 homeIntroContent = """
 I am a software engineer with background in machine learning across vision, NLP, and audio domains.
 I have worked at [Yandex](https://en.wikipedia.org/wiki/Yandex) and [AIMatter](https://techcrunch.com/2017/08/16/google-acquires-aimatter-maker-of-the-fabby-computer-vision-app/) and am presently employed by Google,
-where I am part of the [AI Red Team](https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/).
+where I am part of the [AI Red Team](https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/). I currently reside in Zurich, Switzerland.
 
 I hold a Ph.D. in Mathematics (Graph Theory × Computational Complexity).
 """
@@ -70,6 +70,10 @@ url = "/"
 [[params.menu]]
 name = "posts"
 url = "/posts"
+
+[[params.menu]]
+name = "tags"
+url = "/tags"
 
 # Giscus comments
 [params.giscus]
