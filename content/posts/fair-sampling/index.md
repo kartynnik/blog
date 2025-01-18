@@ -325,7 +325,7 @@ can become limited as it becomes the maximal multiplicity overall.
 
             self._kick_one_value(kicked_key)
         else:
-            # Just keep adding without limitations
+            # Just keep adding without limitations.
             self._size += 1
 
     def _kick_one_value(self, key: K) -> None:
