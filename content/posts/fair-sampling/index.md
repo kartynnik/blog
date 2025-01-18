@@ -93,7 +93,7 @@ A [possible (albeit unpopular) variant of Fisher--Yates shuffle](https://stackov
 looks like this (assuming a zero-indexed array `a`):
 ```
 For i from 1 to n - 1:
-  j <- uniformly random integer on interval [0, i]
+  j <- uniformly random integer on the interval [0, i]
   Swap a[j] and a[i]
 ```
 
