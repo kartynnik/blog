@@ -25,10 +25,10 @@ of the latter will decrease the absolute difference between the numbers of photo
 taken from the two photographers, which in our understanding is going to be fairer.
 
 Call the *signature* of a sample the mapping from keys to their multiplicities
-in that sample. I.e. the sample $\{(Peter, photo_1), (Peter, photo_2),
-(Peter, photo_3), (Steven, photo_4)\}$ has a signature $\{(Peter, 3),
-(Steven, 1)\}$. If (and only if) Steven has other photos, this is considered
-unfair, because one can choose 4 photos with a signature $\{(Peter, 2), (Steven,
+in that sample. I.e. the sample $\{(Peter, photo_1),$ $(Peter, photo_2),$
+$(Peter, photo_3),$ $(Steven, photo_4)\}$ has a signature $\{(Peter, 3),$
+$(Steven, 1)\}$. If (and only if) Steven has other photos, this is considered
+unfair, because one can choose 4 photos with a signature $\{(Peter, 2),$ $(Steven,
 2)\}$. (Note that if Steven doesn't have any more photos to choose from, we have
 to accept $\{(Peter, 3), (Steven, 1)\}$ as fair.) Observe that the fairness of a
 sample can be determined solely by looking at its signature and the signature of
