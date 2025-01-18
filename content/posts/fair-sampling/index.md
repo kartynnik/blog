@@ -85,11 +85,11 @@ Repeat K times:
 ```
 
 To arrive at reservoir sampling, one could start with
-[Fisher---Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm).
+[Fisher--Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm).
 It is easy to see that sampling $K$ times without replacement from a set represented
 as a list is equivalent to shuffling the entire list and taking the first $K$ elements.
 
-A [possible (albeit unpopular) variant of Fisher---Yates shuffle](https://stackoverflow.com/questions/68064254/correctness-of-fisher-yates-shuffle-executed-backward)
+A [possible (albeit unpopular) variant of Fisher--Yates shuffle](https://stackoverflow.com/questions/68064254/correctness-of-fisher-yates-shuffle-executed-backward)
 looks like this (assuming a zero-indexed array `a`):
 ```
 For i from 1 to n - 1:
@@ -140,10 +140,10 @@ we can avoid shuffling the first $K$ elements among themselves --- i.e. add a
 outputs will come in handy in a bit.
 
 A similar (but different) derivation of Algorithm R from a variant of
-Fisher---Yates shuffle is presented [here](https://en.wikipedia.org/wiki/Reservoir_sampling#Relation_to_Fisher%E2%80%93Yates_shuffle).
+Fisher--Yates shuffle is presented [here](https://en.wikipedia.org/wiki/Reservoir_sampling#Relation_to_Fisher%E2%80%93Yates_shuffle).
 
 ## Dynamic reservoir
-The Fisher---Yates shuffle intuition allows us to go further in the amount of
+The Fisher--Yates shuffle intuition allows us to go further in the amount of
 unknowns. Imagine that we don't know $K$ in advance. We can keep accumulating
 items until we learn what the value of $K$ is, at which point, if $K$ is smaller
 than the reservoir accumulated so far, we just leave out the excessive items.
