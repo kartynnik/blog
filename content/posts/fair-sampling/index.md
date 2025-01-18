@@ -14,8 +14,8 @@ hideBackToTop = false
 +++
 
 ## Introduction
-Let's assume you have a collection of photos and each photo has a key attribute
---- the photographer. Now suppose you want to pick $N$ photos of this collection
+Let's assume you have a collection of photos and each photo has a key attribute,
+the photographer. Now suppose you want to pick $N$ photos of this collection
 for an exhibition, optimizing for the better representation of authors.
 Specifically, you want to avoid the following "unfair" situation: one
 photographer has $k$ photos exhibited and at least one unexhibited, whereas
@@ -180,6 +180,12 @@ class AdaptiveReservoirSampler:
     def limit(self) -> None:
         self._reservoir_mode = True
 
+    def __len__(self) -> int:
+        return len(self._reservoir)
+
+    def __iter__(self) -> Iterable[T]:
+        return iter(self._reservoir)
+
     def add(self, item: T) -> T | None:
         """Adds an item to the reservoir.
 
@@ -308,35 +314,35 @@ can become limited as it becomes the maximal multiplicity overall.
                 # When we were adding a new key
                 # to the last level, some key got kicked.
                 kicked_key = maybe_kicked_key
-          else:
-              # We have too many keys in the last level now,
-              # time to shrink and limit it.
-              last_level.limit()
-              kicked_key = last_level.remove_one()
+            else:
+                # We have too many keys in the last level now,
+                # time to shrink and limit it.
+                last_level.limit()
+                kicked_key = last_level.remove_one()
 
-          if not last_level:
-              self._levels.pop()
+            if not last_level:
+                self._levels.pop()
 
-          self._kick_one_value(kicked_key)
+            self._kick_one_value(kicked_key)
         else:
-          # Just keep adding without limitations
-          self._size += 1
+            # Just keep adding without limitations
+            self._size += 1
 
-      def _kick_one_value(self, key: K) -> None:
+    def _kick_one_value(self, key: K) -> None:
         values = self._key_to_values[key]
         values.limit()
         values.remove_one()
         if not values:
-          # Instead of explicitly storing an empty limited reservoir.
-          self._key_to_values[key] = None
+            # Instead of storing an empty limited reservoir.
+            self._key_to_values[key] = None
 ```
 To return a sample, we trivially combine the reservoirs of the keys at level 0,
 which is guaranteed to contain all the keys with at least one value:
 ```python
-      def get_sample(self) -> typing.Iterable[typing.Tuple[K, V]]:
-          return [(key, value)
-                  for key in self._levels[0]
-                  for value in self._key_to_values[key]]
+    def get_sample(self) -> Iterable[tuple[K, V]]:
+        return [(key, value)
+                for key in self._levels[0]
+                for value in self._key_to_values[key]]
 ```
 
 ## Testing uniformity of randomness
@@ -383,7 +389,7 @@ class MultiverseRandomnessSource(object):
         next one onwards) unless it is a termination state.
         """
 
-        def __init__(self, parent=None):
+        def __init__(self, parent: Optional['_Node'] = None):
             # The non-inclusive upper limit for the
             # random number requested from here.
             # `None` denotes a leaf (always appears
@@ -401,10 +407,10 @@ class MultiverseRandomnessSource(object):
                 self.probability_reciprocal = (
                     parent.probability_reciprocal * parent.limit)
 
-        def is_leaf(self):
+        def is_leaf(self) -> bool:
             return self.limit is None
 
-    def __init__(self):
+    def __init__(self) -> None:
         # The current path along the tree
         # of execution path possibilities.
         # Its prefix down to `self._current_depth`
@@ -413,7 +419,7 @@ class MultiverseRandomnessSource(object):
         # The current depth of descent into the tree.
         self._current_depth = 0
 
-    def random_uint_less_than(self, limit):
+    def random_uint_less_than(self, limit: int) -> int:
         if limit < 1:
             raise ValueError('Empty randomization range')
 
@@ -434,77 +440,77 @@ class MultiverseRandomnessSource(object):
         elif parent_state.limit != limit:
             # In a different run, the algorithm
             # rolled a dice with a different limit.
-            raise ValueError(
-                'Another non-determinism source '
-                'detected: different range limit')
+            raise ValueError('Another non-determinism source '
+                             'detected: different range limit')
 
         returned_value = parent_state.next_answer
         self._current_depth += 1
 
         return returned_value
 
-  def rewind(self):
-      if self._current_depth + 1 < len(self._path):
-          # In a different run, the algorithm didn't stop here.
-          raise ValueError(
-              'Another non-determinism source '
-              'detected: did not stop previously')
+    def rewind(self) -> None:
+        if self._current_depth + 1 < len(self._path):
+            # In a different run, the algorithm didn't stop here.
+            raise ValueError('Another non-determinism source '
+                             'detected: did not stop previously')
 
-    assert len(self._path) >= 1
-    assert self._path[-1].is_leaf()
+        assert len(self._path) >= 1
+        assert self._path[-1].is_leaf()
 
-    # Exit from the leaf.
-    self._path.pop()
+        # Exit from the leaf.
+        self._path.pop()
 
-    # Exit from the subtrees that we have fully explored.
-    while self._path:
-        last_branch = self._path[-1]
-        assert not last_branch.is_leaf()
+        # Exit from the subtrees that we have fully explored.
+        while self._path:
+            last_branch = self._path[-1]
+            assert not last_branch.is_leaf()
 
-        last_branch.next_answer += 1
-        if last_branch.next_answer == last_branch.limit:
-            self._path.pop()
-        else:
-            break
+            last_branch.next_answer += 1
+            if last_branch.next_answer == last_branch.limit:
+                self._path.pop()
+            else:
+                break
 
-    if self._path:
-        # Denotes the first leaf of the deepest remaining branch.
-        leaf = self._Node(parent=self._path[-1])
-        self._path.append(leaf)
+        if self._path:
+            # Denotes the first leaf of the deepest remaining branch.
+            leaf = self._Node(parent=self._path[-1])
+            self._path.append(leaf)
 
-    # Be ready to start over.
-    self._current_depth = 0
+        # Be ready to start over.
+        self._current_depth = 0
 
-  def explore(self, algorithm):
-      """Explores all the algorithm run outcomes.
+    def explore(
+        self, algorithm: Callable[[], T]
+    ) -> Iterable[tuple[T, fractions.Fraction]:
+        """Explores all the algorithm run outcomes.
 
-      Provides their probabilities.
+        Provides their probabilities.
 
-      Args:
-          algorithm: A callable employing solely
-              this `MultiverseRandomnessSource`
-              as its exclusive source of randomness.
-      Yields:
-          (result, probability):
-              One per each leaf in the tree of nondeterministic
-              computation paths. `result` is the result
-              of running the algorithm along the given path.
-              `probability` is a `fractions.Fraction` instance
-              representing the probability of reaching this leaf.
-      """
-      # While there's still something to explore...
-      while self._path:
-          result = algorithm()
+        Args:
+            algorithm: A callable employing solely
+                this `MultiverseRandomnessSource`
+                as its exclusive source of randomness.
+        Yields:
+            (result, probability):
+                One per each leaf in the tree of nondeterministic
+                computation paths. `result` is the result
+                of running the algorithm along the given path.
+                `probability` is a `fractions.Fraction` instance
+                representing the probability of reaching this leaf.
+        """
+        # While there's still something to explore...
+        while self._path:
+            result = algorithm()
 
-          leaf = self._path[-1]
-          assert leaf.is_leaf()
+            leaf = self._path[-1]
+            assert leaf.is_leaf()
 
-          probability = fractions.Fraction(
-              1, leaf.probability_reciprocal)
+            probability = fractions.Fraction(
+                1, leaf.probability_reciprocal)
 
-          yield result, probability
+            yield result, probability
 
-          self.rewind()
+            self.rewind()
 ```
 This is how this would be used in a unit test:
 ```python
@@ -512,14 +518,17 @@ multiverse = MultiverseRandomnessSource()
 
 def algorithm():
     sampler = FairSampler(
-        size_limit, random_uint_less_than=multiverse.random_uint_less_than)
+        size_limit,
+        random_uint_less_than=multiverse.random_uint_less_than)
     for key, value in sequence:
         sampler.add(key, value)
     return sampler.get_sample()
 
-all_possible_outcomes_with_probabilities = multiverse.explore(algorithm)
-# Check the properties of the outcomes, in particular, that the total probability
-# of a given outcome doesn't depend on the outcome.
+all_possible_outcomes_with_probabilities = multiverse.explore(
+    algorithm)
+# Check the properties of the outcomes, in particular,
+# that the outcomes follow the definition of fairness and that
+# total probability of a given outcome doesn't depend on the outcome.
 ```
 ## Open question
 Is it possible to avoid storing all the keys?
