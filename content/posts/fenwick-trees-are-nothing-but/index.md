@@ -291,10 +291,10 @@ update operation, it "climbs up" `left` and `right` separately with additional
 bookkeeping.
 
 ## Another example
-Say we're computing range sums and want to be able to increase the numbers on an
+Say we're computing point sums and want to be able to increase the numbers on an
 entire interval at once (as in the setting of [CSES's "Range Update Queries"](https://cses.fi/problemset/task/1651)).
 There's actually a [clever trick](https://cp-algorithms.com/data_structures/fenwick.html#range-operations)
-that allows reformulating the problem in terms of two point-updated Fenwick trees.
+that allows reformulating the problem in terms of a usual Fenwick tree.
 But we can use our extension of the Fenwick tree with both `left` and `right`
 segments for this purpose instead, distributing the increases across range's
 constituent subsegments:
@@ -353,7 +353,7 @@ principle write the recursive traversal code for the implicit segment tree
 with the divider spike at $n/2$) --- but the purpose of that, other than showing
 the equivalence in expressive power, is dubious.
 
-Extended fenwick trees tend to be faster at lookup than segment trees in tests
+Extended Fenwick trees tend to be faster at lookup than segment trees in tests
 (e.g. [here](https://ioinformatics.org/journal/v9_2015_39_44.pdf)), because they
 avoid climbing down the tree to find the constituent parts of a segment ---
 those parts are enumerated explicitly in time proportional to their
