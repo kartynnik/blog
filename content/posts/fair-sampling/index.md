@@ -516,7 +516,7 @@ This is how this would be used in a unit test:
 ```python
 multiverse = MultiverseRandomnessSource()
 
-def algorithm():
+def algorithm() -> Iterable[tuple[K, V]]:
     sampler = FairSampler(
         size_limit,
         random_uint_less_than=multiverse.random_uint_less_than)
