@@ -158,8 +158,6 @@ class RangeSum:
         while pos <= self.n:
             self.fenwick[pos] += add
             pos += lsb(pos)
-            if pos == 0:
-                break
 
     def query(self, left: int, right: int) -> Number:
         return self._query(right) - self._query(left)
