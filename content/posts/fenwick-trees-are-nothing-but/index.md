@@ -253,24 +253,24 @@ class RangeMinimum:
         # is a modification of `[pos, pos + 1)`.
         left = pos
         right = pos + 1
-        if left % 2 == 0:
-            self.left[right] = new_value
-            right += 1
-        else:
-            self.right[left] = new_value
-            left -= 1
-        # "Climb" up the tree.
-        # The left and right children of a certain segment
-        # are associated in our data structure with its midpoint.
+        # Holds the minimum on [left, right).
+        min_value = new_value
+        # "Climb" up the segment tree.
         while left > 0 or right <= self.n:
-            mid = (left + right) // 2
-            mid_min = min(self.left[mid], self.right[mid])
             if right <= self.n and (left == 0
                                     or lsb(left) > lsb(right)):
-                self.left[right] = mid_min
+                self.left[right] = min_value
+                # We are about to extend the segment to the right,
+                # and its new center will be at the current `right`.
+                # Include the minimum over its right (pink) part.
+                min_value = min(min_value, self.right[right])
                 right += lsb(right)
             else:
-                self.right[left] = mid_min
+                # We are about to extend the segment to the left,
+                # and its new center will be at the current `left`.
+                # Include the minimum over its left (blue) part.
+                self.right[left] = min_value
+                min_value = min(min_value, self.left[left])
                 left -= lsb(left)
 
     def query(self, left: int, right: int) -> Number:
@@ -317,12 +317,6 @@ class RangeUpdates:
         result = 0
         left = pos
         right = pos + 1
-        if left % 2 == 0:
-            result = self.left[right]
-            right += 1
-        else:
-            result = self.right[left]
-            left -= 1
         while left > 0 or right <= self.n:
             if right <= self.n and (left == 0
                                     or lsb(left) > lsb(right)):
@@ -367,6 +361,8 @@ Finally, [S. Marchini, S. Vigna. Compact Fenwick trees for dynamic ranking and s
 gives another illustration of Fenwick trees and discusses performance implications
 of the standard tree layout, proposing certain modifications for cache
 friendliness.
+
+Thanks to Aleksey Ropan for suggestions on simplifying the code.
 
 The code for drawing the animations is available [on GitHub](https://github.com/kartynnik/fenwick-illustrations).
 
