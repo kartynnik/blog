@@ -26,7 +26,11 @@ its merits by creating a [dynamic range minimum queries](https://cses.fi/problem
 
 ## Segment trees
 In particular, we'll show how Fenwick trees are in some sense just a cut down
-version of *segment trees*.
+version of *segment trees*.[^jfp]
+
+[^jfp]: A [recent article in the Journal of Functional Programming](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/you-could-have-invented-fenwick-trees/B4628279D4E54229CED97249E96F721D),
+published just a couple of days after this blog post, also explores this link
+--- from a functional programming angle.
 
 A [segment tree](https://cp-algorithms.com/data_structures/segment_tree.html)
 divides the array in consideration into two halves, each of
@@ -373,3 +377,4 @@ The code for drawing the animations is available [on GitHub](https://github.com/
 * [Fenwick Tree vs. Segment Tree --- StackOverflow](https://stackoverflow.com/questions/64190332/fenwick-tree-vs-segment-tree)
 * [M. Dima, R. Ceterchi. Efficient Range Minimum Queries using Binary Indexed Trees](https://ioinformatics.org/journal/v9_2015_39_44.pdf)
 * [S. Marchini, S. Vigna. Compact Fenwick trees for dynamic ranking and selection](https://arxiv.org/abs/1904.12370)
+* [B. Yorgey, You could have invented Fenwick trees --- Journal of Functional Programming, January 2025](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/you-could-have-invented-fenwick-trees/B4628279D4E54229CED97249E96F721D)
