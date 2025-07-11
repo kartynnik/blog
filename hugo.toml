@@ -26,11 +26,7 @@ hideHeader = true
 # Intro on main page, content is markdown
 homeIntroTitle = 'Welcome!'
 homeIntroContent = """
-I am Yury Kartynnik, a software engineer with background in machine learning across vision, NLP, and audio domains.
-I have worked at [Yandex](https://en.wikipedia.org/wiki/Yandex) and [AIMatter](https://techcrunch.com/2017/08/16/google-acquires-aimatter-maker-of-the-fabby-computer-vision-app/) and am presently employed by Google,
-where I am part of the [AI Red Team](https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/). I currently reside in Zurich, Switzerland.
-
-I hold a Ph.D. in Mathematics (Graph Theory × Computational Complexity).
+This is a blog of Yury Kartynnik.
 """
 
 # Collection to display on home
