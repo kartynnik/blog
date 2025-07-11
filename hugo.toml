@@ -26,7 +26,7 @@ hideHeader = true
 # Intro on main page, content is markdown
 homeIntroTitle = 'Welcome!'
 homeIntroContent = """
-This is a blog of Yury Kartynnik.
+This is Yury Kartynnik's blog.
 """
 
 # Collection to display on home
